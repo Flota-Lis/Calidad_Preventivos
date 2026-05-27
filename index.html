@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preventivos - Bavaria Girardota</title>
+    <style>
+        :root {
+            --verde-bavaria: #006A4E;
+            --amarillo-bavaria: #FFCC00;
+            --gris-fondo: #F4F6F6;
+            --blanco: #FFFFFF;
+            --texto-oscuro: #2C3E50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--gris-fondo);
+            margin: 0;
+            padding: 15px;
+            color: var(--texto-oscuro);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background-color: var(--verde-bavaria);
+            color: var(--blanco);
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            border-bottom: 5px solid var(--amarillo-bavaria);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 { margin: 0; font-size: 24px; }
+        .header p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
+
+        .card {
+            background: var(--blanco);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--verde-bavaria);
+            border-left: 4px solid var(--amarillo-bavaria);
+            padding-left: 10px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        select, input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #CBD5E1;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 15px;
+            background-color: #F8FAFC;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--verde-bavaria);
+            background-color: var(--blanco);
+        }
+
+        .item-row {
+            background-color: #F8FAFC;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border-left: 3px solid #CBD5E1;
+        }
+
+        .item-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .item-label {
+            font-size: 14px;
+            font-weight: 500;
+            padding-right: 10px;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-status {
+            padding: 6px 12px;
+            border: 1px solid #CBD5E1;
+            background: var(--blanco);
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .btn-status.ok.active { background-color: #2ECC71; color: white; border-color: #27AE60; }
+        .btn-status.falla.active { background-color: #E74C3C; color: white; border-color: #C0392B; }
+
+        .input-medicion {
+            width: 130px !important;
+            padding: 6px !important;
+            margin: 8px 0 0 0 !important;
+            font-size: 13px !important;
+            display: block;
+        }
+
+        .btn-submit {
+            background-color: var(--verde-bavaria);
+            color: var(--blanco);
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover { background-color: #00543E; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Calidad de Preventivos</h1>
+        <p>Bavaria — Planta Girardota</p>
+    </div>
+
+    <div class="card">
+        <div class="section-title">Parámetros de Control</div>
+        
+        <label for="tecnico">Nombre del Técnico</label>
+        <input type="text" id="tecnico" placeholder="Ej: Juan Pérez">
+
+        <label for="montacargas">Seleccionar Montacargas</label>
+        <select id="montacargas" onchange="evaluarCascada()">
+            <option value="">-- Seleccione un Equipo --</option>
+            <option value="561">Montacargas 561</option>
+            <option value="562">Montacargas 562</option>
+            <option value="567">Montacargas 567</option>
+            <option value="603">Montacargas 603</option>
+            <option value="681">Montacargas 681</option>
+            <option value="761">Montacargas 761</option>
+            <option value="832">Montacargas 832</option>
+            <option value="855">Montacargas 855</option>
+            <option value="860">Montacargas 860</option>
+            <option value="838">Montacargas 838</option>
+        </select>
+
+        <label for="rutina">Seleccionar Horas de Rutina</label>
+        <select id="rutina" disabled onchange="renderizarChecklist()">
+            <option value="">-- Seleccione la Rutina --</option>
+            <option value="250">250 / 500 / 750 Horas</option>
+            <option value="1000">1.000 Horas</option>
+            <option value="2000">2.000 Horas</option>
+        </select>
+    </div>
+
+    <div class="card hidden" id="card-checklist">
+        <div class="section-title">Ítems de Inspección</div>
+        <div id="items-container"></div>
+
+        <label for="observaciones" style="margin-top: 15px;">Observaciones Generales</label>
+        <textarea id="observaciones" rows="3" placeholder="Registre novedades o comentarios generales aquí..."></textarea>
+
+        <button class="btn-submit" onclick="enviarHaciaExcel()">Finalizar e Inyectar a Excel</button>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
