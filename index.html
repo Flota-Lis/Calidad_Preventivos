@@ -12,7 +12,7 @@
             --blanco: #FFFFFF;
             --texto-oscuro: #2C3E50;
         }
-
+ 
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             background-color: var(--gris-fondo);
@@ -20,12 +20,12 @@
             padding: 15px;
             color: var(--texto-oscuro);
         }
-
+ 
         .container {
             max-width: 600px;
             margin: 0 auto;
         }
-
+ 
         .header {
             background-color: var(--verde-bavaria);
             color: var(--blanco);
@@ -36,10 +36,10 @@
             margin-bottom: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-
+ 
         .header h1 { margin: 0; font-size: 24px; }
         .header p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
-
+ 
         .card {
             background: var(--blanco);
             padding: 20px;
@@ -47,7 +47,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             margin-bottom: 20px;
         }
-
+ 
         .section-title {
             font-size: 16px;
             font-weight: bold;
@@ -57,15 +57,15 @@
             margin-bottom: 15px;
             text-transform: uppercase;
         }
-
+ 
         label {
             font-weight: 600;
             display: block;
             margin-bottom: 8px;
             font-size: 14px;
         }
-
-        select, input[type="text"], textarea {
+ 
+        select, input[type="text"], input[type="number"], textarea {
             width: 100%;
             padding: 12px;
             margin-bottom: 18px;
@@ -75,38 +75,76 @@
             font-size: 15px;
             background-color: #F8FAFC;
         }
-
+ 
         select:focus, input:focus, textarea:focus {
             outline: none;
             border-color: var(--verde-bavaria);
             background-color: var(--blanco);
         }
-
+ 
+        /* ── Banners de sección por rutina ── */
+        .section-banner {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-banner.s250  { background: #FFF3F3; border-left: 4px solid #C0392B; color: #C0392B; }
+        .section-banner.s1000 { background: #EBF5FB; border-left: 4px solid #2980B9; color: #2980B9; }
+        .section-banner.s2000 { background: #F5EEF8; border-left: 4px solid #8E44AD; color: #8E44AD; }
+ 
+        /* ── Subsección ── */
+        .subsection-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #7F8C8D;
+            letter-spacing: 1px;
+            margin: 12px 0 5px;
+            padding: 3px 0 3px 10px;
+            border-left: 3px solid #CBD5E1;
+        }
+ 
+        /* ── Ítems ── */
         .item-row {
             background-color: #F8FAFC;
             padding: 12px 15px;
             border-radius: 6px;
             margin-bottom: 8px;
             border-left: 3px solid #CBD5E1;
+            transition: all 0.2s;
         }
-
+        .item-row.estado-ok   { border-left-color: #2ECC71; background-color: #F0FFF4; }
+        .item-row.estado-falla{ border-left-color: #E74C3C; background-color: #FFF5F5; }
+ 
         .item-main {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
         }
-
+ 
         .item-label {
             font-size: 14px;
             font-weight: 500;
+            flex: 1;
+            min-width: 160px;
             padding-right: 10px;
         }
-
+ 
         .item-actions {
             display: flex;
             gap: 10px;
+            flex-shrink: 0;
         }
-
+ 
         .btn-status {
             padding: 6px 12px;
             border: 1px solid #CBD5E1;
@@ -117,18 +155,44 @@
             font-size: 12px;
             transition: all 0.2s;
         }
-
-        .btn-status.ok.active { background-color: #2ECC71; color: white; border-color: #27AE60; }
-        .btn-status.falla.active { background-color: #E74C3C; color: white; border-color: #C0392B; }
-
+        .btn-status.ok.active   { background-color: #2ECC71; color: white; border-color: #27AE60; }
+        .btn-status.falla.active{ background-color: #E74C3C; color: white; border-color: #C0392B; }
+ 
         .input-medicion {
-            width: 130px !important;
-            padding: 6px !important;
+            width: 100% !important;
+            padding: 8px !important;
             margin: 8px 0 0 0 !important;
             font-size: 13px !important;
             display: block;
+            border: 1px solid #CBD5E1;
+            border-radius: 4px;
+            background: #fff;
+            box-sizing: border-box;
         }
-
+        .input-medicion:focus { outline: none; border-color: var(--verde-bavaria); }
+ 
+        /* ── Barra de progreso ── */
+        .progress-label {
+            font-size: 12px;
+            color: #7F8C8D;
+            text-align: right;
+            margin-bottom: 4px;
+        }
+        .progress-bar-wrap {
+            background: #E8ECF0;
+            border-radius: 4px;
+            height: 6px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: #2ECC71;
+            border-radius: 4px;
+            transition: width 0.4s;
+            width: 0%;
+        }
+ 
         .btn-submit {
             background-color: var(--verde-bavaria);
             color: var(--blanco);
@@ -141,26 +205,28 @@
             width: 100%;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: background 0.2s;
+            margin-top: 8px;
         }
-
-        .btn-submit:hover { background-color: #00543E; }
-        .hidden { display: none; }
+        .btn-submit:hover:not(:disabled) { background-color: #00543E; }
+        .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+ 
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
-
+ 
 <div class="container">
     <div class="header">
         <h1>Calidad de Preventivos</h1>
         <p>Bavaria — Planta Girardota</p>
     </div>
-
+ 
     <div class="card">
         <div class="section-title">Parámetros de Control</div>
-        
+ 
         <label for="tecnico">Nombre del Técnico</label>
         <input type="text" id="tecnico" placeholder="Ej: Juan Pérez">
-
+ 
         <label for="montacargas">Seleccionar Montacargas</label>
         <select id="montacargas" onchange="evaluarCascada()">
             <option value="">-- Seleccione un Equipo --</option>
@@ -175,7 +241,7 @@
             <option value="860">Montacargas 860</option>
             <option value="838">Montacargas 838</option>
         </select>
-
+ 
         <label for="rutina">Seleccionar Horas de Rutina</label>
         <select id="rutina" disabled onchange="renderizarChecklist()">
             <option value="">-- Seleccione la Rutina --</option>
@@ -183,15 +249,22 @@
             <option value="1000">1.000 Horas</option>
             <option value="2000">2.000 Horas</option>
         </select>
+ 
+        <label for="horometro">Horómetro Actual (Hrs)</label>
+        <input type="number" id="horometro" placeholder="Ej: 4520">
     </div>
-
+ 
     <div class="card hidden" id="card-checklist">
         <div class="section-title">Ítems de Inspección</div>
+ 
+        <div class="progress-label" id="progress-label">0 / 0 ítems completados</div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-bar"></div></div>
+ 
         <div id="items-container"></div>
-
+ 
         <label for="observaciones" style="margin-top: 15px;">Observaciones Generales</label>
         <textarea id="observaciones" rows="3" placeholder="Registre novedades o comentarios generales aquí..."></textarea>
-
+ 
         <button class="btn-submit" onclick="enviarHaciaExcel()">Finalizar e Inyectar a Excel</button>
     </div>
 </div>
